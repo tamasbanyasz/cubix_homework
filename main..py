@@ -47,6 +47,7 @@ def process_feelings_data(obj):
         obj.starter_df.index += len(conn.cursor().execute('SELECT * FROM feelings;').fetchall()) + 1
 
         feelings_data = obj.starter_df.iloc[:, :4].to_records(index=False).tolist()
+        print(feelings_data)
 
         cursor = conn.cursor()
         cursor.executemany(insert_to_feelings_table, feelings_data)
@@ -61,6 +62,7 @@ def process_another_data(obj):
     """
     with du.create_connection(database_path) as conn:
         another_data = pd.concat(obj.feelings_one_by_one(), axis=0).T.drop_duplicates().T.drop_duplicates().reset_index(drop=True)
+        print(another_data)
                 
         if another_data.empty:
             print("No data to insert into 'another' table.")
@@ -100,8 +102,10 @@ def main():
     
     database_backup.backup_database(database_path, backup_dir)
     
+    
+    # Restore database by a specific datetime
     '''
-    input_datetime = '2024-11-29 16:48:56'
+    input_datetime = '2024-11-29 23:13:28'
     database_restore.restore_database(backup_dir, input_datetime, database_path)
     
     print("Restored db: ")
@@ -112,7 +116,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-    print("Make a change whit this")
    
 
 

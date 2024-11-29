@@ -1,4 +1,4 @@
-from numpy import fromiter, average
+from numpy import average
 from random import randint
 
 class ValueOfFeeling:
@@ -8,7 +8,6 @@ class ValueOfFeeling:
     @classmethod    
     def create_generator_obj(cls,fromiter_end):  # Create generator object with specified iterable range 0-2. 
         
-        print("Generator object: ", fromiter((i for i in range(0, fromiter_end)), int))
         return (i for i in range(0, fromiter_end))
         
         '''
@@ -39,12 +38,11 @@ class ValueOfFeeling:
         
         '''
         
-        cls.list_of_average_values = ([average(next(cls.create_generator_obj(randint(1, 300000)))) for i in range(number_of_generator_obj)])
+        cls.list_of_average_values = ([average(list(cls.create_generator_obj(randint(1, 300000)))) for i in range(number_of_generator_obj)])
         print(f"Average list: {cls.list_of_average_values}")
         
         for i in range(number_of_generator_obj):
             print(f"Check {i + 1} - Generator object's average value")
-            print(average(next(cls.create_generator_obj(randint(1, 3)))))
             
             '''
             

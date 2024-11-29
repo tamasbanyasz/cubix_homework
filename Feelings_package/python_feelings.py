@@ -24,10 +24,14 @@ class Feelings:
         
         for _ in range(50): # number of feelings
             vf.number_of_generator_obj(3) # We use 3 generator object, because we have '3 moments' (Number of generator obj)
-            
-            # Add feelings to DataFrame
-            self.starter_df.loc[len(self.starter_df)] = self.create_feel(next(vf.get_list_of_average_values()), 
-                                                          vf.get_average_value_from_list_of_average_values())
+           
+            list_of_values = list(next(vf.get_list_of_average_values()))  # Get the average values from the generator
+            average_value = vf.get_average_value_from_list_of_average_values()  # Calculate the average
+
+            # Add a new row to the DataFrame
+            self.starter_df.loc[len(self.starter_df)] = self.create_feel(list_of_values, average_value)
+        
+        print(self.starter_df)
                   
     def cleared_masked_datas(self): # Masking DataFrame by feelings
         
