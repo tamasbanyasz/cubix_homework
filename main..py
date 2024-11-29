@@ -37,7 +37,6 @@ INSERT INTO another(moments, feelingid, feeling_value) VALUES (?, ?, ?);
 database_path = r"./Feelings_package/feelingdb.db"
 backup_dir = r"./Feelings_package/db_backup/dir"  
 
-# Többszálú adatfeldolgozási funkciók
 def process_feelings_data(obj):
     """
     Feldolgozza a feelings táblához szükséges adatokat.
@@ -45,7 +44,6 @@ def process_feelings_data(obj):
     with du.create_connection(database_path) as conn:
         obj.append_datas_to_starter_dataframe()
 
-        # Indexek helyes beállítása
         obj.starter_df.index += len(conn.cursor().execute('SELECT * FROM feelings;').fetchall()) + 1
 
         feelings_data = obj.starter_df.iloc[:, :4].to_records(index=False).tolist()
@@ -81,21 +79,18 @@ def main():
     start = time()
     obj = Feelings()
 
-    # Adatbázis inicializálás
     with du.create_connection(database_path) as conn:
         cursor = conn.cursor()
         du.create_table(cursor, create_feelings_table)
         du.create_table(cursor, create_another_table)
     
-    # Többszálú feldolgozás
     with ThreadPoolExecutor() as executor:
         future1 = executor.submit(process_feelings_data, obj)
-        future1.result()  # Megvárjuk az első szál befejeződését
+        future1.result()  
 
         future2 = executor.submit(process_another_data, obj)
-        future2.result()  # Megvárjuk a második szál befejeződését
-
-    # Inner join tesztelése
+        future2.result()  
+        
     with du.create_connection(database_path) as conn:
         print("\nInner join query:")
         du.inner_join_query(conn)
@@ -105,6 +100,7 @@ def main():
     
     database_backup.backup_database(database_path, backup_dir)
     
+    '''
     input_datetime = '2024-11-29 16:48:56'
     database_restore.restore_database(backup_dir, input_datetime, database_path)
     
@@ -112,7 +108,7 @@ def main():
     with du.create_connection(database_path) as conn:
         print("\nInner join query:")
         du.inner_join_query(conn)
-
+    '''
 
 if __name__ == "__main__":
     main()

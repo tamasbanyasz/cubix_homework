@@ -20,11 +20,9 @@ class DatabaseUnity:
             print(f"Hiba történt az adatbázis-kapcsolat létrehozásakor: {e}")
             return None
         
-    
     @classmethod
     def create_table(cls, conn, create_sql_table):
     
-        
         try:    
             conn.execute(create_sql_table)
     

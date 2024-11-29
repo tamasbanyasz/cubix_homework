@@ -25,7 +25,6 @@ class ValueOfFeeling:
             
         '''
     
-    
     @classmethod
     def number_of_generator_obj(cls, number_of_generator_obj):
         
@@ -68,10 +67,7 @@ class ValueOfFeeling:
                 0.5
             
             '''
-            
-            
-        
-          
+
     @classmethod
     def get_list_of_average_values(cls):
         yield iter(cls.list_of_average_values) # Get the full list with the average values
