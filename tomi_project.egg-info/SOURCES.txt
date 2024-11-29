@@ -1,0 +1,12 @@
+setup.py
+Feelings_package/__init__.py
+Feelings_package/database_backup.py
+Feelings_package/database_handling.py
+Feelings_package/database_restore.py
+Feelings_package/python_feelings.py
+Feelings_package/python_value_of_feeling.py
+tomi_project.egg-info/PKG-INFO
+tomi_project.egg-info/SOURCES.txt
+tomi_project.egg-info/dependency_links.txt
+tomi_project.egg-info/requires.txt
+tomi_project.egg-info/top_level.txt
